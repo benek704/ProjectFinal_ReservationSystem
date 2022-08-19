@@ -1,16 +1,18 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: beniamin
-  Date: 10.08.2022
-  Time: 21:59
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>Dodawanie użytkownika</title>
+</head>
+<body>
+<%--@elvariable id="User" type="pl.benek704.projectfinal_reservationsystem.model.User"--%>
+<form:form modelAttribute="User">
+    <form:hidden path="id"/>
+    Nazwa użytkownika:<form:input path="username"/>
+    Email:<form:input path="email"/>
+    Hasło:<form:input path="password"/>
+    <input type="submit"/>
+</form:form>
+
+</body>
 </html>

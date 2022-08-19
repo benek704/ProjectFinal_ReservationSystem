@@ -1,12 +1,10 @@
-package pl.benek704.finalproject.model;
+package pl.benek704.projectfinal_reservationsystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -18,15 +16,18 @@ public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String name;
-    private String sport;
+    @NotBlank
     private String adres;
+    @NotBlank
+    private String city;
+    @NotBlank
     private String password;
     @Email
     private String email;
     private String information;
-    @OneToMany
-    private List<Reservation> reservation;
-
+    @ManyToOne
+    private Sport sport;
 
 }

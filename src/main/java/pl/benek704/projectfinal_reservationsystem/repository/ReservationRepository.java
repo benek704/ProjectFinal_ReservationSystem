@@ -1,2 +1,9 @@
-package pl.benek704.projectfinal_reservationsystem.repository;public interface ReservationRepository {
+package pl.benek704.projectfinal_reservationsystem.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import pl.benek704.projectfinal_reservationsystem.model.Reservation;
+
+@Repository
+public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 }

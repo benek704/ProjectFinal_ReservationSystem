@@ -1,9 +1,6 @@
 package pl.benek704.projectfinal_reservationsystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -18,13 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     private String username;
+    @NotBlank
     private String password;
     @Email
     private String email;
-    @OneToMany
-    private List<Reservation> reservation;
 }

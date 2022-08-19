@@ -9,7 +9,7 @@
 <%--@elvariable id="sportObject" type="pl.benek704.projectfinal_reservationsystem.model.SportObject"--%>
 <form:form modelAttribute="sportObject">
     <form:hidden path="id"/>
-    Nazwa:<form:input path= "name"/>
+    Nazwa:<form:input path="name"/>
     Godzina Otwarcia:<form:input type="time" path="start"/>
     Godzina Zamknięcia:<form:input type="time" path="end"/>
     <form:select path="club.id">
@@ -17,7 +17,6 @@
     </form:select>
     <input type="submit"/>
 </form:form>
-
 
 
 </body>

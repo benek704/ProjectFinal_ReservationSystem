@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.benek704.projectfinal_reservationsystem;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,9 +16,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import pl.coderslab.book.AuthorConverter;
-import pl.coderslab.book.AuthorDao;
-import pl.coderslab.book.PublisherConverter;
+import pl.benek704.projectfinal_reservationsystem.converter.*;
+import pl.benek704.projectfinal_reservationsystem.model.SportObject;
 
 import javax.persistence.EntityManagerFactory;
 import javax.validation.Validator;
@@ -26,7 +25,7 @@ import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "pl.coderslab")
+@ComponentScan(basePackages = "pl.benek704.projectfinal_reservationsystem")
 @EnableTransactionManagement
 @EnableJpaRepositories
 public class AppConfig implements WebMvcConfigurer {
@@ -44,13 +43,15 @@ public class AppConfig implements WebMvcConfigurer {
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
+
     @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {
         LocalEntityManagerFactoryBean entityManagerFactoryBean
                 = new LocalEntityManagerFactoryBean();
-        entityManagerFactoryBean.setPersistenceUnitName("onljees09PersistenceUnit");
+        entityManagerFactoryBean.setPersistenceUnitName("finalprojectPersistenceUnit");
         return entityManagerFactoryBean;
     }
+
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager jpaTransactionManager =
@@ -58,24 +59,11 @@ public class AppConfig implements WebMvcConfigurer {
         return jpaTransactionManager;
     }
 
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(getPublisherConverter());
-        registry.addConverter(getAuthorConverter());
-    }
-    @Bean
-    public PublisherConverter getPublisherConverter() {
-        return new PublisherConverter();
-    }
-    @Bean
-    public AuthorConverter getAuthorConverter() {
-        return new AuthorConverter();
-    }
 
-    @Bean(name="localeResolver")
+    @Bean(name = "localeResolver")
     public LocaleContextResolver getLocaleContextResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
-        localeResolver.setDefaultLocale(new Locale("pl","PL"));
+        localeResolver.setDefaultLocale(new Locale("pl", "PL"));
         return localeResolver;
     }
 
@@ -83,4 +71,42 @@ public class AppConfig implements WebMvcConfigurer {
     public Validator validator() {
         return new LocalValidatorFactoryBean();
     }
+
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(getClubConverter());
+        registry.addConverter(getSportConverter());
+        registry.addConverter(getSportObjectConverter());
+        registry.addConverter(getDateTimeConverter());
+        registry.addConverter(getReservationConverter());
+
+    }
+
+    @Bean
+    public ClubConverter getClubConverter() {
+        return new ClubConverter();
+    }
+
+    @Bean
+    public SportConverter getSportConverter() {
+        return new SportConverter();
+    }
+
+    @Bean
+    public SportObjectConverter getSportObjectConverter() {
+        return new SportObjectConverter();
+    }
+
+    @Bean
+    public DateTimeConverter getDateTimeConverter() {
+        return new DateTimeConverter();
+    }
+
+    @Bean
+    public ReservationConverter getReservationConverter() {
+        return new ReservationConverter();
+    }
+
+
 }
